@@ -1,26 +1,85 @@
-package Ludo; 
+
 import java.util.Random;
-public class LudoGame { 
-private static int taille = 72; 
-private static int num_joueurs = 4;
-private int[] Position;
-private int current_joueur; 
-public LudoGame() {
-Position = new int[num_joueurs]; 
-current_joueur = 0; 
+
+public class LudoGame {
+    private static final int BOARD_SIZE = 40;
+    private static final int NUM_PLAYERS = 4;
+
+    private int[] playerPositions;
+    private int currentPlayer;
+
+    public LudoGame() {
+        playerPositions = new int[NUM_PLAYERS];
+        currentPlayer = 0;
+    }
+
+    // Lance le dé et retourne la valeur obtenue
+    private int rollDice() {
+        Random random = new Random();
+        return random.nextInt(6) + 1;
+    }
+
+    // Déplace le joueur en fonction de la valeur du dé
+    private void movePlayer(int steps) {
+        playerPositions[currentPlayer] = (playerPositions[currentPlayer] + steps) % BOARD_SIZE;
+    }
+
+    // Affiche la position des joueurs sur le plateau
+    private void displayBoard() {
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            System.out.println("Joueur " + (i + 1) + " : Position " + playerPositions[i]);
+        }
+    }
+
+    // Vérifie si un joueur a gagné en atteignant la fin du plateau
+    private boolean hasPlayerWon() {
+        for (int position : playerPositions) {
+            if (position >= BOARD_SIZE - 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Passe au joueur suivant
+    private void nextPlayer() {
+        currentPlayer = (currentPlayer + 1) % NUM_PLAYERS;
+    }
+
+    // Trouve le joueur gagnant
+    private int findWinner() {
+        int maxPosition = -1;
+        int winningPlayer = -1;
+
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            if (playerPositions[i] > maxPosition) {
+                maxPosition = playerPositions[i];
+                winningPlayer = i + 1;
+            }
+        }
+
+        return winningPlayer;
+    }
+
+    public static void main(String[] args) {
+        LudoGame ludoGame = new LudoGame();
+
+        // Joue jusqu'à ce qu'un joueur gagne
+        while (!ludoGame.hasPlayerWon()) {
+            System.out.println("Joueur " + (ludoGame.currentPlayer + 1) + " joue.");
+
+            int diceValue = ludoGame.rollDice();
+            System.out.println("Dé lancé : " + diceValue);
+
+            ludoGame.movePlayer(diceValue);
+            ludoGame.displayBoard();
+
+            ludoGame.nextPlayer();
+            System.out.println();
+        }
+
+        // Affiche le joueur gagnant
+        int winner = ludoGame.findWinner();
+        System.out.println("Joueur " + winner + " a gagné!");
+    }
 }
-// Lance le dé 
-private int Lance() { 
-Random random = new Random(); 
-return random.nextInt(6)+ 1;
-}
-// Déplace le joueur en fonction de la valeur du dé 
-private void deplace_joueur(int etape) { 
-Position[current_joueur] = (Position[current_joueur] + etape)% taille;
-} // affichage de la position des joueurs:
-private void affiche() {
-for (int i = 0; i < num_joueurs; i++) 
-{ System.out.println("Joueur " + (i+1 ) + " : Position " + Position[i]); } 
-}
-// Passe au joueur suivant
-  private void joueur_suivant() { current_joueur = (current_joueur + 1)% num_joueur}
