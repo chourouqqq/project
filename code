@@ -1,0 +1,26 @@
+package Ludo; 
+import java.util.Random;
+public class LudoGame { 
+private static int taille = 72; 
+private static int num_joueurs = 4;
+private int[] Position;
+private int current_joueur; 
+public LudoGame() {
+Position = new int[num_joueurs]; 
+current_joueur = 0; 
+}
+// Lance le dé 
+private int Lance() { 
+Random random = new Random(); 
+return random.nextInt(6)+ 1;
+}
+// Déplace le joueur en fonction de la valeur du dé 
+private void deplace_joueur(int etape) { 
+Position[current_joueur] = (Position[current_joueur] + etape)% taille;
+} // affichage de la position des joueurs:
+private void affiche() {
+for (int i = 0; i < num_joueurs; i++) 
+{ System.out.println("Joueur " + (i+1 ) + " : Position " + Position[i]); } 
+}
+// Passe au joueur suivant
+  private void joueur_suivant() { current_joueur = (current_joueur + 1)% num_joueur}
