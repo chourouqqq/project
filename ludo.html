@@ -4,29 +4,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludo Game</title>
-    <link rel="stylesheet" href="style">
+    <link rel="stylesheet" href="css">
+    <style>
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        .dice {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 24px;
+            line-height: 50px;
+            text-align: center;
+        }
+        #winnerDisplay {
+            margin-top: 20px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="board">
-        <!-- Row 1 -->
-        <div class="cell red"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell yellow"></div>
-        <div class="cell"></div>
-        <div class="cell blue"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell green"></div>
-        <div class="cell"></div>
-        <div class="cell red"></div>
+    <h2>Ludo Game</h2>
+    <table id="gameTable">
+        <thead>
+            <tr>
+                <th></th> 
+                <th>Tour 1</th>
+                <th>Tour 2</th>
+                <th>Tour 3</th>
+                <th>Tour 4</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Joueur 1</td>
+                <td id="player1-tour1"></td>
+                <td id="player1-tour2"></td>
+                <td id="player1-tour3"></td>
+                <td id="player1-tour4"></td>
+              
+            </tr>
+            <tr>
+                <td>Joueur 2</td>
+                <td id="player2-tour1"></td>
+                <td id="player2-tour2"></td>
+                <td id="player2-tour3"></td>
+                <td id="player2-tour4"></td>
+              
+            </tr>
+            <tr>
+                <td>Joueur 3</td>
+                <td id="player3-tour1"></td>
+                <td id="player3-tour2"></td>
+                <td id="player3-tour3"></td>
+                <td id="player3-tour4"></td>
+           
+            </tr>
+            <tr>
+                <td>Joueur 4</td>
+                <td id="player4-tour1"></td>
+                <td id="player4-tour2"></td>
+                <td id="player4-tour3"></td>
+                <td id="player4-tour4"></td>
+               
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="rollDice()">Lancer le dé</button>
+    <div id="diceResult" class="dice"></div>
+    <div id="winnerDisplay"></div>
+    <script>
+        var players = 4; 
+        var turns = 4; 
+        var currentPlayer = 1; 
+        var results = []; 
 
-        <!-- Ajoutez plus de rangées de cellules au besoin -->
-    </div>
+        for (var i = 0; i < players; i++) {
+            results.push([]);
+            for (var j = 0; j < turns; j++) {
+                results[i].push(0);
+            }
+        }
 
-    <div id="dice">Dice: </div>
-    <button id="rollDiceBtn">Roll Dice</button>
+        function rollDice() {
+           
+            var randomNumber = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("diceResult").innerText = randomNumber; 
 
-    <script src="java"></script>
+            
+            var cellToUpdate = document.getElementById("player" + currentPlayer + "-tour" + (results[currentPlayer - 1].indexOf(0) + 1));
+            cellToUpdate.innerText = randomNumber;
+            results[currentPlayer - 1][results[currentPlayer - 1].indexOf(0)] = randomNumber;
+
+            
+            if (results.every(function(playerResult) { return !playerResult.includes(0); })) {
+                
+                currentPlayer = 1;
+                if (results[0].length < turns) {
+                    for (var i = 0; i < players; i++) {
+                        results[i].push(0);
+                    }
+                } else {
+                    
+                    var sums = results.map(function(playerResult) {
+                        return playerResult.reduce(function(a, b) { return a + b; }, 0);
+                    });
+                    var maxSum = Math.max.apply(null, sums);
+                    var winners = [];
+                    for (var i = 0; i < sums.length; i++) {
+                        if (sums[i] === maxSum) {
+                            winners.push(i + 1);
+                        }
+                    }
+                    document.getElementById("winnerDisplay").innerText = "Le gagnant est le Joueur " + winners.join(', ') + " avec un score total de " + maxSum;
+                }
+            } else {
+                
+                currentPlayer = (currentPlayer % players) + 1;
+            }
+        }
+    </script>
 </body>
 </html>
+
+
+
+
+
+
