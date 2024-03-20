@@ -2,7 +2,7 @@
 import java.util.Random;
 
 public class LudoGame {
-    private static final int BOARD_SIZE = 40;
+    private static final int BOARD_SIZE = 72;
     private static final int NUM_PLAYERS = 4;
 
     private int[] playerPositions;
@@ -13,7 +13,7 @@ public class LudoGame {
         currentPlayer = 0;
     }
 
-    // Lance le dé et retourne la valeur obtenue
+    // Lance le dé 
     private int rollDice() {
         Random random = new Random();
         return random.nextInt(6) + 1;
