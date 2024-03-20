@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 2px solid grey;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: whitesmoke;
+}
+
+.player {
+    font-weight: bold;
+}
+
+.player1 {
+    background-color: red;
+}
+
+.player2 {
+    background-color: yellow;
+}
+
+.player3 {
+    background-color: green;
+}
+
+.player4 {
+    background-color: blue;
+}
+
+.dice {
+    width: 50px;
+    height: 50px;
+    border: 2px solid grey;
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dice:hover {
+    background-color: whitesmoke;
+}
+
+#winnerDisplay {
+    margin-top: 20px;
+    border: 2px solid grey;
+    padding: 10px;
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: greenyellow;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: greenyellow;
+}
