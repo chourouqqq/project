@@ -31,20 +31,19 @@ th {
     font-weight: bold;
 }
 
-.player1 {
-    background-color: red;
+#m {
+    background-color: rgb(147, 100, 69);
 }
 
-.player2 {
-    background-color: yellow;
+#ch {
+    background-color: rgb(135, 107, 73);
 }
 
-.player3 {
-    background-color: green;
+#w {
+    background-color: rgb(196, 141, 104);
 }
-
-.player4 {
-    background-color: blue;
+#l {
+    background-color: rgb(197, 151, 93);
 }
 
 .dice {
@@ -60,7 +59,7 @@ th {
 }
 
 .dice:hover {
-    background-color: whitesmoke;
+    background-color: rgba(234, 183, 228, 0.969);
 }
 
 #winnerDisplay {
@@ -68,14 +67,13 @@ th {
     border: 2px solid grey;
     padding: 10px;
     text-align: center;
-    background-color: whitesmoke;
+    background-color: rgba(234, 183, 228, 0.969);
 }
-
 button {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
-    background-color: greenyellow;
+    background-color: rgba(234, 183, 228, 0.969);
     color: white;
     border: none;
     border-radius: 5px;
@@ -84,5 +82,10 @@ button {
 }
 
 button:hover {
-    background-color: greenyellow;
+    background-color: rgba(234, 183, 228, 0.969);
+}
+
+title{
+    text-shadow: rgba(234, 183, 228, 0.969);
+    
 }
