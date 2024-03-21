@@ -6,7 +6,7 @@
     <title>Ludo Game</title>
     <link rel="stylesheet" href="css">
     <style>
-        
+       
         table {
             border-collapse: collapse;
             width: 100%;
@@ -43,11 +43,11 @@
                 <th>Tour 2</th>
                 <th>Tour 3</th>
                 <th>Tour 4</th>
-                
+               
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr id="m">
                 <td>Joueur 1</td>
                 <td id="player1-tour1"></td>
                 <td id="player1-tour2"></td>
@@ -55,23 +55,23 @@
                 <td id="player1-tour4"></td>
               
             </tr>
-            <tr>
+            <tr id="ch">
                 <td>Joueur 2</td>
                 <td id="player2-tour1"></td>
                 <td id="player2-tour2"></td>
                 <td id="player2-tour3"></td>
                 <td id="player2-tour4"></td>
-              
+                
             </tr>
-            <tr>
+            <tr id="w">
                 <td>Joueur 3</td>
                 <td id="player3-tour1"></td>
                 <td id="player3-tour2"></td>
                 <td id="player3-tour3"></td>
                 <td id="player3-tour4"></td>
-           
+               
             </tr>
-            <tr>
+            <tr id="l">
                 <td>Joueur 4</td>
                 <td id="player4-tour1"></td>
                 <td id="player4-tour2"></td>
@@ -90,6 +90,7 @@
         var currentPlayer = 1; 
         var results = []; 
 
+        
         for (var i = 0; i < players; i++) {
             results.push([]);
             for (var j = 0; j < turns; j++) {
@@ -98,16 +99,13 @@
         }
 
         function rollDice() {
-           
             var randomNumber = Math.floor(Math.random() * 6) + 1;
             document.getElementById("diceResult").innerText = randomNumber; 
 
-            
             var cellToUpdate = document.getElementById("player" + currentPlayer + "-tour" + (results[currentPlayer - 1].indexOf(0) + 1));
             cellToUpdate.innerText = randomNumber;
             results[currentPlayer - 1][results[currentPlayer - 1].indexOf(0)] = randomNumber;
 
-            
             if (results.every(function(playerResult) { return !playerResult.includes(0); })) {
                 
                 currentPlayer = 1;
@@ -130,13 +128,20 @@
                     document.getElementById("winnerDisplay").innerText = "Le gagnant est le Joueur " + winners.join(', ') + " avec un score total de " + maxSum;
                 }
             } else {
-                
+               
                 currentPlayer = (currentPlayer % players) + 1;
             }
         }
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
