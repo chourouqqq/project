@@ -1,0 +1,36 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class LudoGameTest {
+
+    @Test
+    public void testRollDice() {
+        LudoGame ludoGame = new LudoGame();
+        int diceValue = ludoGame.rollDice();
+        assertTrue(diceValue >= 1 && diceValue <= 6);
+    }
+
+    @Test
+    public void testMovePlayer() {
+        LudoGame ludoGame = new LudoGame();
+        ludoGame.movePlayer(5);
+        assertEquals(5, ludoGame.playerPositions[ludoGame.currentPlayer]);
+    }
+
+    @Test
+    public void testHasPlayerWon() {
+        LudoGame ludoGame = new LudoGame();
+        assertFalse(ludoGame.hasPlayerWon());
+        ludoGame.playerPositions[0] = LudoGame.BOARD_SIZE - 1;
+        assertTrue(ludoGame.hasPlayerWon());
+    }
+
+    @Test
+    public void testFindWinner() {
+        LudoGame ludoGame = new LudoGame();
+        assertEquals(-1, ludoGame.findWinner());
+
+        ludoGame.playerPositions[2] = LudoGame.BOARD_SIZE - 1;
+        assertEquals(3, ludoGame.findWinner());
+    }
+}
