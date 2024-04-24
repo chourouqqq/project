@@ -1,0 +1,26 @@
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
+public class LudoGameTest {
+
+    @Test
+    public void testRollDice() {
+        // Création d'un mock pour la classe Random
+        Random randomMock = Mockito.mock(Random.class);
+        
+        // Configurer le mock pour retourner une valeur fixe lorsque nextInt(6) est appelé
+        when(randomMock.nextInt(6)).thenReturn(3); // Par exemple, retourne toujours 3
+        
+        // Créer une instance de LudoGame en utilisant le mock
+        LudoGame ludoGame = new LudoGame(randomMock);
+        
+        // Appeler rollDice() qui devrait utiliser le mock
+        int diceValue = ludoGame.rollDice();
+        
+        // Vérifier si la valeur retournée est celle attendue
+        assertEquals(4, diceValue); // Si la méthode retourne 3, le résultat final sera 3 + 1 = 4
+    }
+}
